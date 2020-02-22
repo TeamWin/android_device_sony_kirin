@@ -25,6 +25,7 @@ on init
 
 on boot
     setprop sys.usb.config adb
+    start insmod
     start prepdecrypt
 
 on property:crypto.ready=1
@@ -70,6 +71,13 @@ service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service-qti
     seclabel u:r:recovery:s0
 
 service sbin_qseecomd /sbin/qseecomd
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service insmod /sbin/insmod.sh
+    oneshot
     disabled
     user root
     group root
